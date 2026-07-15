@@ -2,7 +2,7 @@
   "name": "sitezip-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://cgbin24.github.io/SiteZip",
   "author": "cgbin24",
   "dependencies": {
     "@hookform/resolvers": "5.0.1",
