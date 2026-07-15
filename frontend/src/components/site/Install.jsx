@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Download, Chrome, Puzzle, ToggleRight, FolderOpen } from "lucide-react";
 
-const EXT_FILE = "/sitezip-extension.zip";
+const EXT_FILE = "./sitezip-extension.zip";
 
 const installSteps = [
   { icon: FolderOpen, text: "解压下载的 sitezip-extension.zip 到本地目录" },
