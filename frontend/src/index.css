@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900,700&display=swap");
+
+/* ============ 主题变量（data-theme 切换） ============ */
+:root,
+[data-theme="dark"] {
+  --sz-bg: #0f1117;
+  --sz-bg2: #14161f;
+  --sz-surface: #1a1d27;
+  --sz-surface2: #232734;
+  --sz-border: #2b2f3d;
+  --sz-border2: #3a3f4f;
+  --sz-faint: #656b7c;
+  --sz-muted2: #838a9c;
+  --sz-muted: #a6adbd;
+  --sz-text2: #d4d8e0;
+  --sz-text: #f4f6fa;
+  --sz-accent: #f5b301;
+  --sz-accent-hi: #ffce3a;
+  --sz-nav: rgba(15, 17, 23, 0.72);
+  --sz-grid: rgba(255, 255, 255, 0.035);
+  --sz-noise-opacity: 0.04;
+}
+
+[data-theme="light"] {
+  --sz-bg: #f5f6f9;
+  --sz-bg2: #eef0f5;
+  --sz-surface: #ffffff;
+  --sz-surface2: #f1f3f8;
+  --sz-border: #e3e6ee;
+  --sz-border2: #d3d8e3;
+  --sz-faint: #a3a9b8;
+  --sz-muted2: #7b8294;
+  --sz-muted: #5c6375;
+  --sz-text2: #363c4a;
+  --sz-text: #14171f;
+  --sz-accent: #e59a00;
+  --sz-accent-hi: #f5ac1a;
+  --sz-nav: rgba(255, 255, 255, 0.78);
+  --sz-grid: rgba(20, 30, 50, 0.05);
+  --sz-noise-opacity: 0.02;
+}
+
+[data-theme="green"] {
+  --sz-bg: #0e1c16;
+  --sz-bg2: #12241b;
+  --sz-surface: #16261f;
+  --sz-surface2: #1d3128;
+  --sz-border: #274a3b;
+  --sz-border2: #345c49;
+  --sz-faint: #5f866f;
+  --sz-muted2: #7ba689;
+  --sz-muted: #9cc4ad;
+  --sz-text2: #cfe6d8;
+  --sz-text: #e9f4ed;
+  --sz-accent: #45c46f;
+  --sz-accent-hi: #6ee88f;
+  --sz-nav: rgba(14, 28, 22, 0.74);
+  --sz-grid: rgba(150, 255, 190, 0.045);
+  --sz-noise-opacity: 0.03;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  background: var(--sz-bg);
+  color: var(--sz-text);
+  font-family: "IBM Plex Sans", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.font-display {
+  font-family: "Cabinet Grotesk", "IBM Plex Sans", sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+::selection {
+  background: var(--sz-accent);
+  color: #1a1200;
+}
+
+/* 细网格背景 */
+.sz-grid-bg {
+  background-image:
+    linear-gradient(to right, var(--sz-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--sz-grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* 噪点纹理 */
+.sz-noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--sz-noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 跑马灯 */
+@keyframes sz-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.sz-marquee {
+  animation: sz-marquee 22s linear infinite;
+}
+
+/* ============ 圆润化：全局收敛边角 ============ */
+.App section > div [class*="border"],
+.App button,
+.App input,
+.App a[data-testid],
+.App .logo {
+  border-radius: 14px;
+}
+.App button { border-radius: 12px; }
+.App input { border-radius: 10px; }
+.App .badge, .App .chip { border-radius: 999px; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--sz-bg); }
+::-webkit-scrollbar-thumb { background: var(--sz-border); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--sz-border2); }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}

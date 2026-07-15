@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "SiteZip · 站点静态资源一键打包",
+  "version": "1.3.0",
+  "description": "抓取当前网站「源代码/来源」面板下的静态资源，支持深度模式(刷新监听网络)完整捕获异步/动态资源，按类型/域名筛选与勾选下载，保留目录结构并打包为 zip。",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "SiteZip · 打包当前站点资源",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "debugger",
+    "downloads",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "author": "cgbin24",
+  "homepage_url": "https://github.com/cgbin24/SiteZip",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "sitezip@cgbin24.github.io",
+      "strict_min_version": "115.0"
+    }
+  }
+}

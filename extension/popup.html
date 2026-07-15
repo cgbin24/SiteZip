@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SiteZip</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="head">
+        <div class="brand">
+          <img src="icons/icon48.png" alt="SiteZip" class="logo" />
+          <div class="brand-txt">
+            <div class="name">SiteZip</div>
+            <div class="tag">静态资源打包器</div>
+          </div>
+        </div>
+        <div class="head-actions">
+          <button id="themeToggle" class="theme-toggle" data-testid="popup-theme-toggle" title="切换主题">深色</button>
+          <span class="ver">v1.3.0</span>
+        </div>
+      </header>
+
+      <section class="site-card" id="siteCard">
+        <div class="site-label">当前站点</div>
+        <div class="site-host" id="siteHost" data-testid="popup-site-host">读取中…</div>
+        <div class="site-url" id="siteUrl"></div>
+      </section>
+
+      <!-- 阶段 1：扫描前的抓取选项 -->
+      <section class="stage" id="stageScan">
+        <div class="opts">
+          <label class="opt">
+            <input type="checkbox" id="optTree" checked data-testid="popup-opt-tree" />
+            <span>抓取「源代码/来源」已加载资源</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" id="optDom" checked data-testid="popup-opt-dom" />
+            <span>解析 DOM 补全引用的静态资源</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" id="optRendered" checked data-testid="popup-opt-rendered" />
+            <span>额外保存渲染后的 HTML</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" id="optSourceMap" checked data-testid="popup-opt-sourcemap" />
+            <span>还原 Source Map 原始源码（app/、webpack/…）</span>
+          </label>
+        </div>
+
+        <div class="mode-box">
+          <div class="mode-title">抓取模式</div>
+          <label class="opt mode-opt">
+            <input type="radio" name="scanMode" id="modeDeep" value="deep" checked data-testid="popup-mode-deep" />
+            <span><b>深度</b> · 刷新页面并监听网络，完整捕获异步 / 动态资源（推荐）</span>
+          </label>
+          <label class="opt mode-opt">
+            <input type="radio" name="scanMode" id="modeQuick" value="quick" data-testid="popup-mode-quick" />
+            <span><b>快速</b> · 不刷新，监听后续网络请求并等待加载完成</span>
+          </label>
+        </div>
+
+        <button id="scanBtn" class="run-btn" data-testid="popup-scan-btn">
+          <span>扫描资源列表</span>
+        </button>
+      </section>
+
+      <!-- 阶段 2：扫描后的资源清单 -->
+      <section class="stage" id="stageList" hidden>
+        <div class="list-toolbar">
+          <div class="stat" data-testid="popup-stat">
+            <span id="statSel">0</span> / <span id="statTotal">0</span> 已选
+            <span class="stat-size" id="statSize"></span>
+          </div>
+          <button class="link-btn" id="rescanBtn" data-testid="popup-rescan-btn">重新扫描</button>
+        </div>
+
+        <div class="filters">
+          <div class="filter-row">
+            <span class="filter-label">类型</span>
+            <div class="chips" id="typeChips" data-testid="popup-type-chips"></div>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">域名</span>
+            <div class="chips" id="hostChips" data-testid="popup-host-chips"></div>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">搜索</span>
+            <input type="text" id="searchInput" placeholder="过滤 URL…" class="search-input" data-testid="popup-search" />
+          </div>
+        </div>
+
+        <div class="bulk">
+          <button class="bulk-btn" data-bulk="all" data-testid="popup-select-all">全选</button>
+          <button class="bulk-btn" data-bulk="none" data-testid="popup-select-none">取消全选</button>
+          <button class="bulk-btn" data-bulk="invert" data-testid="popup-select-invert">反选</button>
+          <button class="bulk-btn" data-bulk="primary" data-testid="popup-select-primary">仅主域名</button>
+        </div>
+
+        <div class="reslist" id="resList" data-testid="popup-reslist"></div>
+
+        <button id="startBtn" class="run-btn" data-testid="popup-start-btn">
+          <span class="run-txt">打包所选并下载 ZIP</span>
+        </button>
+      </section>
+
+      <div class="progress-box" id="progressBox" hidden>
+        <div class="bar-track"><div class="bar-fill" id="barFill"></div></div>
+        <div class="progress-meta">
+          <span id="progressPct" data-testid="popup-progress">0%</span>
+          <span id="progressCount"></span>
+        </div>
+      </div>
+
+      <div class="log" id="log" data-testid="popup-log"></div>
+    </div>
+
+    <script src="lib/jszip.min.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
