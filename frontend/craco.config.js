@@ -85,8 +85,6 @@ let webpackConfig = {
     },
     configure: (webpackConfig) => {
 
-      webpackConfig.output.publicPath = isDevServer ? "" : "/SiteZip/";
-
       // Add ignored patterns to reduce watched directories
         webpackConfig.watchOptions = {
           ...webpackConfig.watchOptions,

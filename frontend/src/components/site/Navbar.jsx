@@ -26,7 +26,7 @@ export default function Navbar() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
           <a href="#top" className="flex items-center gap-2.5" data-testid="navbar-brand">
             <div className="grid h-9 w-9 place-items-center border border-[var(--sz-border)] bg-[var(--sz-surface)]">
-              <img src="/logo.svg" alt="SiteZip Logo" className="h-6 w-6 text-[var(--sz-accent)]" />
+              <img src="./logo.svg" alt="SiteZip Logo" className="h-6 w-6 text-[var(--sz-accent)]" />
             </div>
             <div className="leading-none">
               <div className="font-display text-lg font-extrabold tracking-tight">SiteZip</div>
